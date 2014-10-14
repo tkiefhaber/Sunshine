@@ -6,11 +6,10 @@
 
     <application
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:debuggable="true">
-
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MyActivity"
             android:label="@string/app_name" >
@@ -19,6 +18,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:parentActivityName=".MyActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tomk.sunshine.app.MyActivity" />
         </activity>
     </application>
 
