@@ -17,7 +17,9 @@ public class MyActivity extends ActionBarActivity {
 
     private final String LOG_TAG = MyActivity.class.getSimpleName();
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v(LOG_TAG, "onCreate!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         if (savedInstanceState == null) {
@@ -25,6 +27,36 @@ public class MyActivity extends ActionBarActivity {
                     .add(R.id.container, new ForecastFragment())
                     .commit();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        Log.v(LOG_TAG, "onStart!");
+        super.onStart();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.v(LOG_TAG, "onPause!");
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.v(LOG_TAG, "onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.v(LOG_TAG, "onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.v(LOG_TAG, "onDestroy");
+        super.onDestroy();
     }
 
     private void openPreferredLocationInMap() {
