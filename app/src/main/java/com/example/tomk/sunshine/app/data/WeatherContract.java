@@ -1,12 +1,27 @@
 package com.example.tomk.sunshine.app.data;
 
+import android.content.ContentUris;
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
  * Created by tom on 10/25/14.
  */
 public class WeatherContract {
+
+    public static final String CONTENT_AUTHORITY = "com.example.tomk.sunshine.app";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+
+    public static final String PATH_WEATHER = "weather";
+    public static final String PATH_LOCATION = "location";
+
     public static final class WeatherEntry implements BaseColumns {
+        public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_WEATHER).build();
+
+        public static final String CONTENT_TYPE = "vdn.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_LOCATION;
+
+        public static final String CONTENT_ITEM_TYPE = "vdn.android.cursor.item/" + CONTENT_AUTHORITY + PATH_LOCATION;
+
         public static final String TABLE_NAME = "weather";
 
         public static final String COLUMN_LOC_KEY = "location_id";
@@ -28,9 +43,27 @@ public class WeatherContract {
         public static final String COLUMN_WIND_SPEED = "wind_speed";
 
         public static final String COLUMN_DEGREES = "degreees";
+
+        public static Uri buildWeatherUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static Uri buildWeatherLocation(String locationSetting) {
+            return CONTENT_URI.buildUpon().appendPath(locationSetting).build();
+        }
+
+        public static Uri buildWeatherLocationWithStartDate(String locationSetting, String startDate) {
+            return CONTENT_URI.buildUpon().appendPath(locationSetting).appendQueryParameter(startDate).build();
+        }
     }
 
     public static final class LocationEntry implements BaseColumns {
+        public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_LOCATION).build();
+
+        public static final String CONTENT_TYPE = "vdn.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_LOCATION;
+
+        public static final String CONTENT_ITEM_TYPE = "vdn.android.cursor.item/" + CONTENT_AUTHORITY + PATH_LOCATION;
+
         public static final String TABLE_NAME = "location";
 
         public static final String COLUMN_LOCATION_SETTING = "location_setting";
