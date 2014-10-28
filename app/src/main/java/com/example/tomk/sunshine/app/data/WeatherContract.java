@@ -55,6 +55,18 @@ public class WeatherContract {
         public static Uri buildWeatherLocationWithStartDate(String locationSetting, String startDate) {
             return CONTENT_URI.buildUpon().appendPath(locationSetting).appendQueryParameter(startDate).build();
         }
+
+        public static String getLocationSettingFromUri(Uri uri) {
+            return uri.getPathSegments().get(1);
+        }
+
+        public static String getDateFromUri(Uri uri) {
+            return uri.getPathSegments(2);
+        }
+
+        public static String getStartDateFromUri(Uri uri) {
+            return uri.getQueryParameter(COLUMN_DATETEXT);
+        }
     }
 
     public static final class LocationEntry implements BaseColumns {
@@ -73,5 +85,9 @@ public class WeatherContract {
         public static final String COLUMN_COORD_LAT = "coord_lat";
 
         public static final String COLUMN_COORD_LONG = "coord_long";
+
+        public static Uri buildLocationUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
     }
 }
